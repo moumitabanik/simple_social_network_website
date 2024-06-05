@@ -156,18 +156,12 @@ function follow_user(element, username, origin) {
         login_popup('follow');
         return false;
     }
-    fetch('/'+username+'/follow', {
+    fetch(`/network/${username}/follow`, {
         method: 'PUT'
     })
     .then(() => {
         if(origin === 'suggestion') {
             element.parentElement.innerHTML = `<button class="btn btn-success" type="button" onclick="unfollow_user(this,'${username}','suggestion')">Following</button>`;
-        }
-        else if(origin === 'edit_page') {
-            element.parentElement.innerHTML = `<button class="btn btn-success float-right" onclick="unfollow_user(this,'${username}','edit_page')" id="following-btn">Following</button>`;
-        }
-        else if(origin === 'dropdown') {
-            ////////////////////////////////////////////////////////////////////////////////////////////
         }
 
         if(document.querySelector('.body').dataset.page === 'profile') {
@@ -188,18 +182,12 @@ function unfollow_user(element, username, origin) {
         login_popup('follow');
         return false;
     }
-    fetch('/'+username+'/unfollow', {
+    fetch('network/'+username+'/unfollow', {
         method: 'PUT'
     })
     .then(() => {
         if(origin === 'suggestion') {
             element.parentElement.innerHTML = `<button class="btn btn-outline-success" type="button" onclick="follow_user(this,'${username}','suggestion')">Follow</button>`;
-        }
-        else if(origin === 'edit_page') {
-            element.parentElement.innerHTML = `<button class="btn btn-outline-success float-right" onclick="follow_user(this,'${username}','edit_page')" id="follow-btn">Follow</button>`;
-        }
-        else if(origin === 'dropdown') {
-            ///////////////////////////////////////////////////////////////////////////////////////////
         }
 
         if(document.querySelector('.body').dataset.page === 'profile') {
@@ -217,9 +205,9 @@ function unfollow_user(element, username, origin) {
 
 
 function goto_register() {
-    window.location.href = '/networketwork/register';
+    window.location.href = '/network/register';
 }
 
 function goto_login() {
-    window.location.href = '/networketwork/login';
+    window.location.href = '/network/login';
 }
